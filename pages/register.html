@@ -1,10 +1,12 @@
 <div ng-controller="registerCtrl as registerCtrl">
 
-    <form name="registerForm" ng-submit="registerCtrl.submitForm(registerForm.$valid)" novalidate>
+    <h1 class="header">Register</h1>
+
+    <form id="login-form" name="registerForm" ng-submit="registerCtrl.submitForm(registerForm.$valid)" novalidate>
 
         <div>
             <label>Username</label>
-            <input type="text" name="username" ng-model="registerCtrl.user.username"
+            <input type="text" name="username" ng-model="registerCtrl.user.UserName"
                    ng-minlength="registerCtrl.usernameMinChars"
                    ng-maxlength="registerCtrl.usernameMaxChars"
                    ng-pattern="/^[a-zA-Z]*$/"
@@ -19,10 +21,9 @@
             </div>
         </div>
 
-
         <div>
             <label>Password</label>
-            <input type="password" name="password" ng-model="registerCtrl.user.password"
+            <input type="password" name="password" ng-model="registerCtrl.user.UserPass"
                    ng-minlength="registerCtrl.passwordMinChars"
                    ng-maxlength="registerCtrl.passwordMaxChars"
                    ng-pattern="/^[a-zA-Z0-9]*$/"
@@ -38,8 +39,34 @@
         </div>
 
         <div>
+            <label>First name</label>
+            <input type="text" name="fName" ng-model="registerCtrl.user.UserFirstName"
+                   ng-pattern="/^[a-zA-Z']*$/"
+                   required/>
+
+            <div class="ngMessageClass register-message-error" ng-messages="registerForm.fName.$error"
+                 ng-if="registerForm.fName.$touched">
+                <p ng-message="pattern">First name must contain only letters</p>
+                <p ng-message="required">First name is required</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Last name</label>
+            <input type="text" name="lName" ng-model="registerCtrl.user.UserLastName"
+                   ng-pattern="/^[a-zA-Z']*$/"
+                   required/>
+
+            <div class="ngMessageClass register-message-error" ng-messages="registerForm.lName.$error"
+                 ng-if="registerForm.lName.$touched">
+                <p ng-message="pattern">Last name must contain only letters</p>
+                <p ng-message="required">Last name is required</p>
+            </div>
+        </div>
+
+        <div>
             <label>Email</label>
-            <input type="email" name="email" ng-model="registerCtrl.user.email" required/>
+            <input type="email" name="email" ng-model="registerCtrl.user.UserEmail" required/>
 
             <div class="ngMessageClass register-message-error" ng-messages="registerForm.email.$error"
                  ng-if="registerForm.email.$touched">
@@ -50,7 +77,7 @@
 
         <div>
             <label>Security question</label>
-            <input type="text" name="sQuestion" ng-model="registerCtrl.user.sQuestion" required/>
+            <input type="text" name="sQuestion" ng-model="registerCtrl.user.UserQuest" required/>
 
             <div class="ngMessageClass register-message-error" ng-messages="registerForm.sQuestion.$error"
                  ng-if="registerForm.sQuestion.$touched">
@@ -60,7 +87,7 @@
 
         <div>
             <label>Security answer</label>
-            <input type="text" name="sAnswer" ng-model="registerCtrl.user.sAnswer" required/>
+            <input type="text" name="sAnswer" ng-model="registerCtrl.user.UserAns" required/>
 
             <div class="ngMessageClass register-message-error" ng-messages="registerForm.sAnswer.$error"
                  ng-if="registerForm.sAnswer.$touched">
@@ -70,7 +97,7 @@
 
         <div>
             <label>Country:</label>
-            <select ng-model="registerCtrl.user.country" name="country"
+            <select ng-model="registerCtrl.user.UserCountry" name="country"
                     ng-options='country for country in registerCtrl.countries'
                     required></select>
 
@@ -82,13 +109,21 @@
 
         <div>
             <label>Currency:</label>
-            <select ng-model="registerCtrl.user.currency" name="currency"
+            <select ng-model="registerCtrl.user.UserCurrency" name="currency"
                     ng-options='currency for currency in registerCtrl.currencies'
                     required></select>
 
             <div class="register-message-error ngMessageClass" ng-messages="registerForm.currency.$error"
                  ng-if="registerForm.currency.$touched">
                 <p ng-message="required">Currency is required.</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Favorite categories:</label>
+            <div ng-repeat="category in registerCtrl.categories">
+                <label>{{category.CategoryName}}</label>
+                <input type="checkbox" ng-model="registerCtrl.categories[$index].isFavorite"/>
             </div>
         </div>
 
