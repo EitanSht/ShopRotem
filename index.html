@@ -1,19 +1,64 @@
 <!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="css/main.css">
-<body>
+<html lang="en">
 
-<div ng-app="myApp" ng-controller="mainCtrl as mainCtrl">
-    <ul>
-        <li><a class="active" href="#/!">Home</a></li>
-        <li ng-hide="mainCtrl.loginService.isloggedIn"><a href="#!login">Login</a></li>
-        <li ng-hide="mainCtrl.loginService.isloggedIn"><a href="#!register">Register</a></li>
-        <li><a href="#!about">About</a></li>
-        <li>hello {{mainCtrl.loginService.currentUser}}</li>
-    </ul>
-    <ng-view></ng-view>
-</div>
+<head>
+    <title>RTS Herb Shop</title>
 
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="css/creative.min.css" rel="stylesheet">
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+</head>
+
+<body id="page-top">
+<header>
+    <div ng-app="myApp" ng-controller="mainCtrl as mainCtrl">
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                    </button>
+                    <a class="navbar-brand page-scroll" href="#/!">RTS Herb Shop</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a class="page-scroll" href="#!login">Login</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#!register">Register</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href="#!about">About</a>
+                        </li>
+                        <li>
+                            <a>hello {{mainCtrl.loginService.currentUser}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <ng-view></ng-view>
+    </div>
+</header>
+
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/tether/tether.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="js/creative.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.1/angular-messages.js"></script>
@@ -23,4 +68,5 @@
 <script src="js/register/registerCtrl.js"></script>
 <script src="js/home/homeCtrl.js"></script>
 </body>
+
 </html>

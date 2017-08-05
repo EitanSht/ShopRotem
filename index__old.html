@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="css/main.css">
+<body>
+
+<div ng-app="myApp" ng-controller="mainCtrl as mainCtrl">
+    <ul>
+        <li><a class="active" href="#/!">Home</a></li>
+        <li ng-hide="mainCtrl.loginService.isloggedIn"><a href="#!login">Login</a></li>
+        <li ng-hide="mainCtrl.loginService.isloggedIn"><a href="#!register">Register</a></li>
+        <li><a href="#!about">About</a></li>
+        <li>hello {{mainCtrl.loginService.currentUser}}</li>
+    </ul>
+    <ng-view></ng-view>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.6.1/angular-messages.js"></script>
+<script src="mainApp.js"></script>
+<script src="js/about/aboutCtrl.js"></script>
+<script src="js/login/loginCtrl.js"></script>
+<script src="js/register/registerCtrl.js"></script>
+<script src="js/home/homeCtrl.js"></script>
+</body>
+</html>

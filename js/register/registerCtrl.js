@@ -36,10 +36,9 @@ app.controller('registerCtrl', ['$http', function ($http) {
         }
     }();
 
-    vm.getCategories = function()
-    {
+    vm.getCategories = function () {
         return $http.get("http://localhost:4000/items/getCategories")
-            .then(function(response) {
+            .then(function (response) {
                 vm.categories = response.data;
             })
             .catch(function (e) {
