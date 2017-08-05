@@ -4,8 +4,7 @@ app.controller("loginCtrl", ['$scope', 'loginService', '$location', 'cookieServi
     vm.isErrorMessageShown = false;
 
     vm.cookieUser = cookieService.getUserByCookie();
-
-    if(vm.cookieUser){
+    if(vm.cookieUser && confirm("The site recognized you as an existing user, would like to sign in as " + vm.cookieUser.userName)){
         vm.userName = vm.cookieUser.userName;
         vm.password = vm.cookieUser.password;
     }
@@ -19,7 +18,7 @@ app.controller("loginCtrl", ['$scope', 'loginService', '$location', 'cookieServi
                 $location.path("/");
             }
         });
-    }
+    };
 
     vm.forgotPassword = function () {
         $location.path("/forgotPassword");
