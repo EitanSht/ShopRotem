@@ -39,7 +39,21 @@ li a:hover {
     align-items: center;
 }
 
+#link {
+    text-decoration: underline;
+    color : blue;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 /*Register*/
 .register-message-error {
     color: red;
+}
+
+/*Forgot password*/
+.forgot-password-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

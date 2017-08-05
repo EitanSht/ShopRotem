@@ -14,6 +14,9 @@ app.config(['$routeProvider', function($routeProvider){
         .when("/about", {
             templateUrl: "pages/about.html"
         })
+        .when("/forgotPassword", {
+            templateUrl: 'pages/forgotPassword.html'
+        })
         .otherwise({
             redirect : "/"
         });

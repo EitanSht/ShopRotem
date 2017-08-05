@@ -6,4 +6,8 @@
         <input type="button" value="login" ng-click="loginCtrl.login()" ng-disabled="!(loginCtrl.userName && loginCtrl.password)"/>
     </div>
     <div ng-show="loginCtrl.isErrorMessageShown" style="color:red">User name and password are incorrect</div>
+    <div>
+        Forgot the password?
+        <span ng-click="loginCtrl.forgotPassword()" id="link">Click here</span>
+    </div>
 </div>
