@@ -2,7 +2,7 @@
     <div>
         <h1>Trending items:</h1>
         <div ng-repeat="item in homeCtrl.top5Items">
-            <product item="item"></product>
+            <item item="item"></item>
         </div>
         <div ng-if="homeCtrl.isNoPopularItemsMessageShow" style="color:red">Sorry, there are no trending items</div>
     </div>

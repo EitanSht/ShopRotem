@@ -1,4 +1,4 @@
-app.controller('registerCtrl', ['$http', '$location', function ($http, $location) {
+app.controller('registerCtrl', ['$http', '$location', 'cookieService', function ($http, $location, cookieService) {
     var vm = this;
 
     vm.usernameMinChars = 3;
@@ -62,8 +62,10 @@ app.controller('registerCtrl', ['$http', '$location', function ($http, $location
         }
 
         return $http.post('http://localhost:4000/Users/registeruser', vm.user)
-            .then(function (user) {
+            .then(function () {
+                cookieService.setCookieUser({userName: vm.user.UserName, password: vm.user.UserPass, date: Date.now()});
                 $location.path("/login");
+
             }).catch(function (e) {
                 alert("An error occurred or the username is already exists, please try again");
             });

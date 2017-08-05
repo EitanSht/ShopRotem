@@ -1,7 +1,14 @@
-app.controller("loginCtrl", ['$scope', 'loginService', '$location', function ($scope, loginService, $location) {
+app.controller("loginCtrl", ['$scope', 'loginService', '$location', 'cookieService', function ($scope, loginService, $location, cookieService) {
 
     let vm = this;
     vm.isErrorMessageShown = false;
+
+    vm.cookieUser = cookieService.getUserByCookie();
+
+    if(vm.cookieUser){
+        vm.userName = vm.cookieUser.userName;
+        vm.password = vm.cookieUser.password;
+    }
 
     vm.login = function () {
         loginService.login(vm.userName, vm.password).then(function (response) {
@@ -39,6 +46,20 @@ app.factory('loginService', ['$http', function ($http) {
                 return {error: true};
             });
     };
+
+    return service;
+}]);
+
+app.factory('cookieService', ['$cookies', function ($cookies) {
+    let service = {};
+
+    service.getUserByCookie = function () {
+        return JSON.parse($cookies.get("user"));
+    };
+
+    service.setCookieUser = function(user) {
+        $cookies.putObject("user", user);
+    }
 
     return service;
 }]);

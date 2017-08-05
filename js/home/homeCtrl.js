@@ -26,7 +26,7 @@ app.controller("homeCtrl", ['$http', 'loginService', function ($http, loginServi
             }).catch(function (error) {
                 vm.isNoNewItemsMessageShow = true;
             });
-        }, 650);
+        }, 700);
     }
 
     vm.loadItems = function () {
@@ -39,9 +39,9 @@ app.controller("homeCtrl", ['$http', 'loginService', function ($http, loginServi
     }();
 }]);
 
-app.directive('product', function () {
+app.directive('item', function () {
     return {
-        templateUrl: 'pages/templates/product-template.html',
+        templateUrl: 'pages/templates/item-template.html',
         scope: {
             item: '='
         }

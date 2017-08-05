@@ -23,7 +23,7 @@ app.controller("forgotPasswordCtrl", ["forgetPassService", "$location", function
             alert("Your password is: " + vm.user.UserPassword);
             $location.path("/login");
         } else {
-
+            vm.isWrongAnswerMessageShown = true;
         }
     }
 }]);
@@ -34,7 +34,6 @@ app.factory('forgetPassService', ['$http', function ($http) {
     service.getQuestion = function (userName) {
 
         let url = 'http://localhost:4000/Users/GetUserDetails?UserName=' + userName;
-        console.log(url);
         return $http.get(url)
             .then(function (response) {
                 return response;
