@@ -1,4 +1,4 @@
-var app = angular.module("myApp", ["ngRoute", "ngMessages"]);
+var app = angular.module("myApp", ["ngRoute", "ngMessages", 'ngCookies']);
 
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider
@@ -13,6 +13,9 @@ app.config(['$routeProvider', function($routeProvider){
         })
         .when("/about", {
             templateUrl: "pages/about.html"
+        })
+        .when("/forgotPassword", {
+            templateUrl: 'pages/forgotPassword.html'
         })
         .otherwise({
             redirect : "/"

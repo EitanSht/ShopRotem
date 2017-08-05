@@ -1,4 +1,5 @@
 <div ng-controller="homeCtrl as homeCtrl">
+
     <div class="header-content">
         <div class="header-content-inner">
             <h1 id="homeHeading">Your Favorite Source of Free Bootstrap Themes</h1>
@@ -7,5 +8,20 @@
                 template and start going, no strings attached!</p>
             <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
         </div>
+
+    <div>
+        <h1>Trending items:</h1>
+        <div ng-repeat="item in homeCtrl.top5Items">
+            <product item="item"></product>
+        </div>
+        <div ng-if="homeCtrl.isNoPopularItemsMessageShow" style="color:red">Sorry, there are no trending items</div>
+    </div>
+    <div ng-show="homeCtrl.loginService.isloggedIn">
+        <h1 >Top new items:</h1>
+        <div ng-repeat="item in homeCtrl.newItems">
+
+        </div>
+        <div ng-if="homeCtrl.isNoNewItemsMessageShow" style="color:red">Sorry, there are no new items</div>
+
     </div>
 </div>

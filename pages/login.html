@@ -1,4 +1,5 @@
 <div ng-controller="loginCtrl as loginCtrl">
+
     <div class="header-content">
         <div class="header-content-inner">
             <h1 id="homeHeading">Login</h1>
@@ -15,6 +16,22 @@
             </div>
             <div ng-show="loginCtrl.isErrorMessageShown" style="color:limegreen">User name and password are incorrect
             </div>
+
+    <h1 class="header">Login</h1>
+    <div id="login-form">
+        <input class="form-input" type="text" ng-model="loginCtrl.userName" placeholder="Enter user name"/>
+        <input class="form-input" type="password" ng-model="loginCtrl.password" placeholder="Enter password"/>
+        <input type="button" value="login" ng-click="loginCtrl.login()" ng-disabled="!(loginCtrl.userName && loginCtrl.password)"/>
+        <br/>
+        <div>
+            Forgot the password?
+            <span ng-click="loginCtrl.forgotPassword()" class="link">Click here</span>
+        </div>
+        <br/>
+        <div>
+            Not a member yet?
+            <span ng-click="loginCtrl.register()" class="link">Register now</span>
+
         </div>
     </div>
 </div>

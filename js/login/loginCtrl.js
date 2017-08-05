@@ -1,7 +1,13 @@
-app.controller("loginCtrl",['$scope','loginService', '$location', function ($scope, loginService, $location) {
+app.controller("loginCtrl", ['$scope', 'loginService', '$location', 'cookieService', function ($scope, loginService, $location, cookieService) {
 
     let vm = this;
     vm.isErrorMessageShown = false;
+
+    vm.cookieUser = cookieService.getUserByCookie();
+    if(vm.cookieUser && confirm("The site recognized you as an existing user, would like to sign in as " + vm.cookieUser.userName)){
+        vm.userName = vm.cookieUser.userName;
+        vm.password = vm.cookieUser.password;
+    }
 
     vm.login = function () {
         loginService.login(vm.userName, vm.password).then(function (response) {
@@ -12,30 +18,51 @@ app.controller("loginCtrl",['$scope','loginService', '$location', function ($sco
                 $location.path("/");
             }
         });
+    };
+
+    vm.forgotPassword = function () {
+        $location.path("/forgotPassword");
     }
+
+    vm.register = function () {
+        $location.path("/register");
+    }
+
 }]);
 
-app.factory('loginService',['$http' ,function($http){
+app.factory('loginService', ['$http', function ($http) {
     let service = {};
 
     service.currentUser = "guest";
     service.isloggedIn = false;
 
-    service.login = function(userName, password){
+    service.login = function (userName, password) {
 
         let url = 'http://localhost:4000/Users/login?UserName=' + userName + '&UserPassword=' + password;
         console.log(url);
         return $http.get(url)
-            .then(function(response){
-                if(response.data != "Username Or Password Incorrect"){
-                    service.isloggedIn = true;
-                    service.currentUser = userName;
-                    return response;
-                } else {
-                    return {error: true};
-                }
+            .then(function (response) {
+                service.isloggedIn = true;
+                service.currentUser = userName;
+                return response;
+            }).catch(function (error) {
+                return {error: true};
             });
     };
+
+    return service;
+}]);
+
+app.factory('cookieService', ['$cookies', function ($cookies) {
+    let service = {};
+
+    service.getUserByCookie = function () {
+        return JSON.parse($cookies.get("user"));
+    };
+
+    service.setCookieUser = function(user) {
+        $cookies.putObject("user", user);
+    }
 
     return service;
 }]);

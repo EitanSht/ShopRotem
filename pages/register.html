@@ -1,4 +1,5 @@
 <div ng-controller="registerCtrl as registerCtrl">
+
     <div class="header-content">
         <div class="header-content-inner">
             <h1 id="homeHeading">Register</h1>
@@ -118,6 +119,188 @@
                            class="btn btn-primary btn-xl"/>
                 </div>
             </form>
+
+    <h1 class="header">Register</h1>
+
+    <form id="login-form" name="registerForm" ng-submit="registerCtrl.submitForm(registerForm.$valid)" novalidate>
+
+        <div>
+            <label>Username</label>
+            <input type="text" name="username" ng-model="registerCtrl.user.UserName"
+                   ng-minlength="registerCtrl.usernameMinChars"
+                   ng-maxlength="registerCtrl.usernameMaxChars"
+                   ng-pattern="/^[a-zA-Z]*$/"
+                   required>
+
+            <div class="ngMessageClass register-message-error" ng-messages="registerForm.username.$error"
+                 ng-if="registerForm.username.$touched">
+                <p ng-message="minlength">Username must contain at least {{registerCtrl.usernameMinChars}} letters</p>
+                <p ng-message="maxlength">Username must contain at most {{registerCtrl.usernameMaxChars}} letters</p>
+                <p ng-message="required">Username is required</p>
+                <p ng-message="pattern">Invalid username - must contain only letters</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" ng-model="registerCtrl.user.UserPass"
+                   ng-minlength="registerCtrl.passwordMinChars"
+                   ng-maxlength="registerCtrl.passwordMaxChars"
+                   ng-pattern="/^[a-zA-Z0-9]*$/"
+                   required>
+
+            <div class="ngMessageClass register-message-error" ng-messages="registerForm.password.$error"
+                 ng-if="registerForm.password.$touched">
+                <p ng-message="minlength">Password must contain at least {{registerCtrl.passwordMinChars}} chars</p>
+                <p ng-message="maxlength">Username must contain at most {{registerCtrl.passwordMaxChars}} chars</p>
+                <p ng-message="required">Password is required</p>
+                <p ng-message="pattern">Invalid password - must contain only letters and numbers</p>
+            </div>
+        </div>
+
+        <div>
+            <label>First name</label>
+            <input type="text" name="fName" ng-model="registerCtrl.user.UserFirstName"
+                   ng-pattern="/^[a-zA-Z']*$/"
+                   required/>
+
+            <div class="ngMessageClass register-message-error" ng-messages="registerForm.fName.$error"
+                 ng-if="registerForm.fName.$touched">
+                <p ng-message="pattern">First name must contain only letters</p>
+                <p ng-message="required">First name is required</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Last name</label>
+            <input type="text" name="lName" ng-model="registerCtrl.user.UserLastName"
+                   ng-pattern="/^[a-zA-Z']*$/"
+                   required/>
+
+            <div class="ngMessageClass register-message-error" ng-messages="registerForm.lName.$error"
+                 ng-if="registerForm.lName.$touched">
+                <p ng-message="pattern">Last name must contain only letters</p>
+                <p ng-message="required">Last name is required</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Email</label>
+            <input type="email" name="email" ng-model="registerCtrl.user.UserEmail" required/>
+
+            <div class="ngMessageClass register-message-error" ng-messages="registerForm.email.$error"
+                 ng-if="registerForm.email.$touched">
+                <p ng-message="required">Email is required</p>
+                <p ng-show="registerForm.email.$error.email">Invalid email</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Security question</label>
+            <input type="text" name="sQuestion" ng-model="registerCtrl.user.UserQuest" required/>
+
+            <div class="ngMessageClass register-message-error" ng-messages="registerForm.sQuestion.$error"
+                 ng-if="registerForm.sQuestion.$touched">
+                <p ng-message="required">Security question is required</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Security answer</label>
+            <input type="text" name="sAnswer" ng-model="registerCtrl.user.UserAns" required/>
+
+            <div class="ngMessageClass register-message-error" ng-messages="registerForm.sAnswer.$error"
+                 ng-if="registerForm.sAnswer.$touched">
+                <p ng-message="required">Security answer is required</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Country:</label>
+            <select ng-model="registerCtrl.user.UserCountry" name="country"
+                    ng-options='country for country in registerCtrl.countries'
+                    required></select>
+
+            <div class="register-message-error ngMessageClass" ng-messages="registerForm.country.$error"
+                 ng-if="registerForm.country.$touched">
+                <p ng-message="required">Country is required.</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Currency:</label>
+            <select ng-model="registerCtrl.user.UserCurrency" name="currency"
+                    ng-options='currency for currency in registerCtrl.currencies'
+                    required></select>
+
+            <div class="register-message-error ngMessageClass" ng-messages="registerForm.currency.$error"
+                 ng-if="registerForm.currency.$touched">
+                <p ng-message="required">Currency is required.</p>
+            </div>
+        </div>
+
+        <div>
+            <label>Favorite categories:</label>
+            <div ng-repeat="category in registerCtrl.categories">
+                <label>{{category.CategoryName}}</label>
+                <input type="checkbox" ng-model="registerCtrl.categories[$index].isFavorite"/>
+            </div>
+        </div>
+
+        <!--<div>-->
+        <!--<table>-->
+        <!--<tr>-->
+        <!--<td>-->
+        <!--<label>Please choose security question</label>-->
+        <!--</td>-->
+        <!--<td>-->
+        <!--<select ng-options='question for question in registerCtrl.securityQuestions'-->
+        <!--ng-model="registerCtrl.user.securityQuestion"-->
+        <!--name="cat1"></select>-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td>-->
+        <!--</td>-->
+        <!--<td>-->
+        <!--<lable>answer:</lable><input type="text" name="sequrityQuestion" ng-model="registerCtrl.user.securityAns">-->
+        <!--</td>-->
+        <!--</tr>-->
+        <!--</table>-->
+        <!--<br />-->
+        <!--&lt;!&ndash; ngMessages goes here &ndash;&gt;-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; country &ndash;&gt;-->
+        <!--<div class="form-group">-->
+        <!--<label>Choose country:</label>-->
+        <!--<select ng-model="registerCtrl.user.country" ng-options='country.Name for country in registerCtrl.countries'-->
+        <!--name="country"-->
+        <!--required></select>-->
+
+        <!--&lt;!&ndash; ngMessages for countrys goes here &ndash;&gt;-->
+        <!--<div class="help-block ngMessageClass" ng-messages="registerForm.country.$error" ng-if="registerForm.$submitted" >-->
+        <!--<p ng-message="required">Country is required.</p>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; favorite category1 &ndash;&gt;-->
+        <!--<div class="form-group">-->
+        <!--<label>Choose first favorite category:</label>-->
+        <!--<select ng-options='category.categoryID as category.categoryName for category in registerCtrl.categories'-->
+        <!--ng-model="registerCtrl.user.fav1"></select>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash; favorite category1 &ndash;&gt;-->
+        <!--<div class="form-group">-->
+        <!--<label>Choose second favorite category:</label>-->
+        <!--<select ng-options='category.categoryID as category.categoryName for category in registerCtrl.categories'-->
+        <!--ng-model="registerCtrl.user.fav2"></select>-->
+        <!--</div>-->
+
+        <div>
+            <input type="submit" value="Submit" ng-disabled="!registerForm.$valid">
+
         </div>
     </div>
 </div>

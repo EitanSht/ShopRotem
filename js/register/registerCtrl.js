@@ -1,4 +1,4 @@
-app.controller('registerCtrl', ['$http', function ($http) {
+app.controller('registerCtrl', ['$http', '$location', 'cookieService', function ($http, $location, cookieService) {
     var vm = this;
 
     vm.usernameMinChars = 3;
@@ -10,14 +10,17 @@ app.controller('registerCtrl', ['$http', function ($http) {
     vm.categories = [];
     vm.currencies = ["ILS", "USD"];
     vm.user = {
-        username: '',
-        password: '',
-        email: '',
-        sQuestion: '',
-        sAnswer: '',
-        country: '',
-        fav1: '',
-        fav2: ''
+        UserName: '',
+        UserPass: '',
+        UserFirstName: '',
+        UserLastName: '',
+        UserEmail: '',
+        UserQuest: '',
+        UserAns: '',
+        UserCountry: '',
+        UserCurrency: '',
+        UserFavoriteCategories: [],
+        UserPermission: 0
     };
 
     vm.initCountriesByXML = function () {
@@ -39,7 +42,15 @@ app.controller('registerCtrl', ['$http', function ($http) {
     vm.getCategories = function () {
         return $http.get("http://localhost:4000/items/getCategories")
             .then(function (response) {
+
                 vm.categories = response.data;
+
+                for (let i = 0; i < response.data.length; i++) {
+                    vm.categories[i] = {};
+                    vm.categories[i].CategoryName = response.data[i].CategoryName;
+                    vm.categories[i].isFavorite = false;
+                }
+
             })
             .catch(function (e) {
                 return Promise.reject(e);
@@ -48,13 +59,19 @@ app.controller('registerCtrl', ['$http', function ($http) {
 
     vm.submitForm = function () {
 
-        vm.user.country = vm.user.country.Name;
-        return $http.post('/api/register', vm.user)
-            .then(function (response) {
-                console.log("user is registered = " + vm.user.username);
-            })
-            .catch(function (e) {
-                return Promise.reject(e);
+        for (let i = 0; i < vm.categories.length; i++) {
+            if (vm.categories[i].isFavorite) {
+                vm.user.UserFavoriteCategories.push(vm.categories[i].CategoryName);
+            }
+        }
+
+        return $http.post('http://localhost:4000/Users/registeruser', vm.user)
+            .then(function () {
+                cookieService.setCookieUser({userName: vm.user.UserName, password: vm.user.UserPass, date: Date.now()});
+                $location.path("/login");
+
+            }).catch(function (e) {
+                alert("An error occurred or the username is already exists, please try again");
             });
     }
 }]);
