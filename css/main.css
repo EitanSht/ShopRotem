@@ -39,7 +39,7 @@ li a:hover {
     align-items: center;
 }
 
-#link {
+.link {
     text-decoration: underline;
     color : blue;
     font-weight: bold;

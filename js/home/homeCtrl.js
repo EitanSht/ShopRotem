@@ -1,14 +1,21 @@
 app.controller("homeCtrl", ['$http', 'loginService', function ($http, loginService) {
     let vm = this;
     vm.loginService = loginService;
+    //
     // vm.item = {
     //     ITEMNAME: "Something",
     //     ITEMDESCRIPTION: "bla bla bla bla bla",
     //     ITEMPRICE: 50,
     //     ITEMPICTUREPATH: ""
     // };
-
-    vm.items = [];
+    //
+    // vm.item1 = {
+    //     ITEMNAME: "Something1",
+    //     ITEMDESCRIPTION: "bla bla bla bla bla1",
+    //     ITEMPRICE: 502,
+    //     ITEMPICTUREPATH: "1"
+    // };
+    // vm.top5Items = [vm.item, vm.item1];
 
     vm.getTop5Trending = function () {
         $http.get('http://localhost:4000/items/gettrending').then(function (items) {
@@ -27,7 +34,7 @@ app.controller("homeCtrl", ['$http', 'loginService', function ($http, loginServi
                 vm.isNoNewItemsMessageShow = true;
             });
         }, 700);
-    }
+    };
 
     vm.loadItems = function () {
         setTimeout(function () {
@@ -39,7 +46,7 @@ app.controller("homeCtrl", ['$http', 'loginService', function ($http, loginServi
     }();
 }]);
 
-app.directive('item', function () {
+app.directive('product', function () {
     return {
         templateUrl: 'pages/templates/item-template.html',
         scope: {

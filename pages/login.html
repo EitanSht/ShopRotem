@@ -4,10 +4,16 @@
         <input class="form-input" type="text" ng-model="loginCtrl.userName" placeholder="Enter user name"/>
         <input class="form-input" type="password" ng-model="loginCtrl.password" placeholder="Enter password"/>
         <input type="button" value="login" ng-click="loginCtrl.login()" ng-disabled="!(loginCtrl.userName && loginCtrl.password)"/>
+        <br/>
+        <div>
+            Forgot the password?
+            <span ng-click="loginCtrl.forgotPassword()" class="link">Click here</span>
+        </div>
+        <br/>
+        <div>
+            Not a member yet?
+            <span ng-click="loginCtrl.register()" class="link">Register now</span>
+        </div>
     </div>
     <div ng-show="loginCtrl.isErrorMessageShown" style="color:red">User name and password are incorrect</div>
-    <div>
-        Forgot the password?
-        <span ng-click="loginCtrl.forgotPassword()" id="link">Click here</span>
-    </div>
 </div>

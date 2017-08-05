@@ -24,6 +24,10 @@ app.controller("loginCtrl", ['$scope', 'loginService', '$location', 'cookieServi
         $location.path("/forgotPassword");
     }
 
+    vm.register = function () {
+        $location.path("/register");
+    }
+
 }]);
 
 app.factory('loginService', ['$http', function ($http) {
